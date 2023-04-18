@@ -84,3 +84,106 @@ Add the following routes inside `routes_controllers_views_params/config/routes.r
 get '/driver' => 'main#driver'
 get '/navigator' => 'main#navigator'
 ```
+
+### As a user, I can visit a page called cubed that takes a number as a param and displays that number cubed.
+
+Create controller
+`rails g controller cubed`
+
+Run server
+`rails s`
+
+Add method to controller
+
+```ruby
+def cube
+  @cube = params[:number].to_i ** 3
+end
+```
+
+Create view called `cube.html.erb`
+
+```ruby
+<h1>cube</h1>
+<p><%= @cube %></p>
+```
+
+Create new route
+
+```ruby
+get '/cube/:number' => 'cubed#cube'
+```
+
+### As a user, I can visit a page called evenly that takes two numbers as params and displays whether or not the first number is evenly divisible by the second.
+
+Add controller method
+
+```ruby
+def evenly
+  num1 = params[:num1]
+  num2 = params[:num2]
+  @is_evenly = num1 % num2 == 0
+end
+```
+
+Add route
+
+`get '/evenly/:num1/:num2' => 'main#evenly'`
+
+Create view
+
+```ruby
+<h1>Evenly</h1>
+<p><%= @is_evenly %></p>
+```
+
+### As a user, I can visit a page called palindrome that takes a string as a param and displays whether it is a palindrome (the same word forward and backward).
+
+Create method
+
+```ruby
+def palindrome
+  @is_palindrome = params[:string].downcase == params[:stirng].downcase.reverse
+end
+```
+
+Create route
+
+```ruby
+get '/palindrome/:string' => 'main#palindrome'
+```
+
+Create view
+
+```ruby
+<h1>Palindrome</h1>
+<%= @is_palindrome %>
+```
+
+### As a user, I can visit a page called madlib that takes params of a noun, verb, adjective, adverb, and displays a short silly story.
+
+Create method
+
+```ruby
+def madlib
+  @verb = params[:verb]
+  @noun = params[:noun]
+  @adjective = params[:adjective]
+  @adverb = params[:adverb]
+
+  @silly_story = "The day I saw the Monkey King #{@verb} was one of the most interesting days of the year. After he did that, the king played chess on his brother's #{@noun} and then combed his #{@adjective} hair with a comb made out of old fish bones. Later that same day, I saw the Monkey King dance #{@adverb} in front of an audience of kangaroos and wombats."
+end
+```
+
+Create route
+
+```ruby
+get '/madlib/:verb/:noun/:adjective/:adverb' => 'main#madlib'
+```
+
+Create view
+
+```ruby
+<h1>Madlib</h1>
+<%= @silly_story %>
+```
