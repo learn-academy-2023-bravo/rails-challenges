@@ -1,0 +1,54 @@
+#Controller
+class MainController < ApplicationController
+    def mark
+        @music1 = ['Slightly Stoopid', 'Nipsey Hustle', 'Leon Bridges']
+    end
+    def wagner
+        @music2 = ['Drake', '21 Savage', 'Pitbull']
+    end
+    def landing
+    end
+end
+
+#Views
+ #mark
+ <h1>Welcomes to Mark's Page</h1>
+<h2>These are his three favorite artist:</h2>
+
+<ul>
+<% @music1.each do |value| %>
+<li> <%= value %> </li>
+<% end %>
+</ul>
+
+<h3> <%= link_to 'Home', '/' %> </h3>
+
+#wagner
+<h1>Welcomes to Wagner's Page</h1>
+<h2>These are his three favorite artist:</h2>
+
+<ul>
+<% @music2.each do |value| %>
+<li> <%= value %> </li>
+<% end %>
+</ul>
+
+<h3> <%= link_to 'Home', '/' %> </h3>
+
+#landing
+<h1 class='title'>Welcome to Mark and Wagner's Top 3 Website</h1>
+
+<h3 class='links'><%= link_to "Wagner's Top 3 Artist", '/wagner' %></h3>
+<br/>
+<h3 class='links'><%= link_to "Mark's Top 3 Artist", '/mark' %></h3>
+
+<div class'space'><iframe src="https://giphy.com/embed/26BoCVdjSJOWT0Fpu" width="480" height="360" frameBorder="0" class="spaceship" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fly-ufo-spaceship-26BoCVdjSJOWT0Fpu"></a></p></div>
+
+#routes
+Rails.application.routes.draw do
+    get '/mark' => 'main#mark'
+    get '/wagner' => 'main#wagner'
+    get '/landing' => 'main#landing'
+    root to: 'main#landing'
+  end
+  
